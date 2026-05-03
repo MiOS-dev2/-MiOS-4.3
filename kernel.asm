@@ -2,21 +2,20 @@
 [bits 16]
 
 kernel_start:
-    ; Очистка экрана
+
     mov ax, 0x0003
     int 0x10
     
-    ; Вывод сообщения что ядро загрузилось
+
     mov si, msg_kernel_loaded
     call print
     
     mov si, msg_welcome
     call print
-    
-    ; Запуск командной оболочки
+
     jmp shell
 
-; =============== КОМАНДНАЯ ОБОЛОЧКА ===============
+
 shell:
     mov si, msg_prompt
     call print
@@ -45,7 +44,7 @@ shell:
     call print
     jmp shell
 
-; =============== КОМАНДЫ ===============
+
 help_cmd:
     mov si, msg_help
     call print
@@ -85,7 +84,7 @@ reboot_cmd:
     int 0x16
     jmp 0xffff:0x0000
 
-; =============== ФУНКЦИИ ВВОДА/ВЫВОДА ===============
+
 print_green_dollar:
     mov ah, 0x03
     mov bh, 0
